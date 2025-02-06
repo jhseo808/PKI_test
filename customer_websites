@@ -1,0 +1,63 @@
+import webbrowser
+import tkinter as tk
+from tkinter import ttk
+
+# 웹사이트 목록 (이름, URL)
+left_websites = [
+    ("우리", "https://"),
+    ("주택", "https://")
+]
+
+right_websites = [
+    ("IBK기업은행(개인)", "http://mybank.ibk.co.kr/"),
+    ("IBK기업은행(기업)", "http://kiup.ibk.co.kr/")
+]
+
+# 웹페이지 열기 함수
+def open_website(url):
+    webbrowser.open(url)
+
+# GUI 설정
+root = tk.Tk()
+root.title("PKI 고객사 웹페이지 링크 툴")
+root.geometry("500x650")
+root.configure(bg="white")
+
+# 메인 프레임 (2개 컬럼 레이아웃)
+frame = tk.Frame(root, bg="white")
+frame.pack(expand=True, fill="both", padx=20, pady=20)
+
+# 왼쪽 프레임
+left_frame = tk.Frame(frame, bg="white")
+left_frame.grid(row=0, column=0, padx=20, sticky="n")
+
+left_label = ttk.Label(left_frame, text="🏦 Key#biz 관련 사이트", font=("Arial", 12, "bold"), background="white")
+left_label.pack(pady=10)
+
+for name, url in left_websites:
+    link = tk.Label(left_frame, text=name, fg="blue", cursor="hand2", font=("Arial", 11, "underline"), bg="white")
+    link.pack(pady=3)
+    link.bind("<Button-1>", lambda e, u=url: open_website(u))
+
+# 가운데 구분선
+separator = ttk.Separator(frame, orient="vertical")
+separator.grid(row=0, column=1, sticky="ns", padx=10)
+
+# 오른쪽 프레임
+right_frame = tk.Frame(frame, bg="white")
+right_frame.grid(row=0, column=2, padx=20, sticky="n")
+
+right_label = ttk.Label(right_frame, text="🌐 nxKey 관련 사이트", font=("Arial", 12, "bold"), background="white")
+right_label.pack(pady=10)
+
+for name, url in right_websites:
+    link = tk.Label(right_frame, text=name, fg="blue", cursor="hand2", font=("Arial", 11, "underline"), bg="white")
+    link.pack(pady=3)
+    link.bind("<Button-1>", lambda e, u=url: open_website(u))
+
+# 제작자 정보 (하단 우측)
+footer = tk.Label(root, text="Holy8055", font=("Arial", 7, "italic"), bg="white", fg="gray")
+footer.place(relx=0.98, rely=0.98, anchor="se")  # 오른쪽 하단에 위치 조정
+
+# 실행
+root.mainloop()
